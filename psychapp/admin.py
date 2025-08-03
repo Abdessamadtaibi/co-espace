@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Cabin,CabinPsychologist,User
+from .models import Cabin,CabinPsychologist,CustomUser,Appointment
 
 admin.site.register(Cabin)
 admin.site.register(CabinPsychologist)
-admin.site.register(User)
+admin.site.register(CustomUser)
+admin.site.register(Appointment)
