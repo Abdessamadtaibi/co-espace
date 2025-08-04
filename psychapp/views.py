@@ -8,6 +8,7 @@ from .models import Cabin, Room, CustomUser, CabinPsychologist, Appointment
 from .serializers import CabinSerializer, RoomSerializer,CabinPsychologistSerializer,AppointmentSerializer
 from rest_framework.exceptions import NotFound
 from django.contrib.auth import get_user_model
+from django.utils.timezone import now
 User = get_user_model()
 
 class IsAdmin(permissions.BasePermission):
@@ -109,5 +110,4 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         if appointment.psychologist != request.user:
             raise PermissionDenied("You can only delete your own appointments.")
         return super().destroy(request, *args, **kwargs)
-
 

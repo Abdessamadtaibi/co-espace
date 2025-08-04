@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7(s&^7s*%@6-03(!od0a7qb%^vjk&ma!pakdog@m^iq33c^1^)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["ittissal.com", "www.ittissal.com"]
 
 
 # Application definition
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'psych.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'psychapp', 'accounts', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,6 +72,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'psych.wsgi.application'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://ittissal.com",
+    "https://ittissal.com",
+]
 
 
 # Database
@@ -139,12 +144,26 @@ REST_FRAMEWORK = {
 
 DJOSER = {
     'LOGIN_FIELD': 'email',
+    "SEND_ACTIVATION_EMAIL": True,
+    "USER_CREATE_PASSWORD_RETYPE": True,
+    "ACTIVATION_URL": "activate/{uid}/{token}/",
     'SERIALIZERS': {
         'user_create': 'psychapp.serializers.CustomCreateUserSerializer',
         'user': 'psychapp.serializers.CustomUserSerializer',
+    },
+    "EMAIL": {
+        "activation": "djoser.email.ActivationEmail",
     },
 }
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 AUTH_USER_MODEL = 'psychapp.CustomUser'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'taibiabdessamad2003@gmail.com'
+EMAIL_HOST_PASSWORD = 'tnuoeqtcvwncjucj'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'no-reply@co-espace.com'
