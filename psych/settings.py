@@ -23,10 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7(s&^7s*%@6-03(!od0a7qb%^vjk&ma!pakdog@m^iq33c^1^)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["ittissal.com", "www.ittissal.com"]
+ALLOWED_HOSTS = ['*']
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
@@ -45,14 +46,14 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 ROOT_URLCONF = 'psych.urls'
 
@@ -73,10 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'psych.wsgi.application'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://ittissal.com",
-    "https://ittissal.com",
-]
+
 
 
 # Database
@@ -146,10 +144,11 @@ DJOSER = {
     'LOGIN_FIELD': 'email',
     "SEND_ACTIVATION_EMAIL": True,
     "USER_CREATE_PASSWORD_RETYPE": True,
-    "ACTIVATION_URL": "activate/{uid}/{token}/",
+    'ACTIVATION_URL': 'activate/{uid}/{token}/',
     'SERIALIZERS': {
-        'user_create': 'psychapp.serializers.CustomCreateUserSerializer',
-        'user': 'psychapp.serializers.CustomUserSerializer',
+        'user_create': 'psychapp.serializers.CreateUserSerializer',
+        'current_user': 'psychapp.serializers.UserSerializer',
+        'user': 'psychapp.serializers.UserSerializer',
     },
     "EMAIL": {
         "activation": "djoser.email.ActivationEmail",

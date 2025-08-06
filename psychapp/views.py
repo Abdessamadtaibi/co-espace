@@ -111,3 +111,20 @@ class AppointmentViewSet(viewsets.ModelViewSet):
             raise PermissionDenied("You can only delete your own appointments.")
         return super().destroy(request, *args, **kwargs)
 
+class MyAppointmentViewSet(viewsets.ModelViewSet):
+    serializer_class = AppointmentSerializer
+    permission_classes = [permissions.IsAuthenticated, IsPsychologist]
+
+    def get_queryset(self):
+        # Only appointments where the psychologist is the current user
+        return Appointment.objects.filter(psychologist=self.request.user)
+
+    def perform_update(self, serializer):
+        # Ensure the psychologist cannot change the owner
+        serializer.save(psychologist=self.request.user)
+
+    def destroy(self, request, *args, **kwargs):
+        appointment = self.get_object()
+        if appointment.psychologist != request.user:
+            raise PermissionDenied("You can only delete your own appointments.")
+        return super().destroy(request, *args, **kwargs)
