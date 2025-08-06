@@ -21,14 +21,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-7(s&^7s*%@6-03(!od0a7qb%^vjk&ma!pakdog@m^iq33c^1^)'
-
+import os
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['ittissal.com', 'www.ittissal.com']
 
-CORS_ALLOW_ALL_ORIGINS = True
-
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    "http://ittissal.com",
+    "https://ittissal.com",
+]
 # Application definition
 
 INSTALLED_APPS = [
