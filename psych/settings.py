@@ -23,14 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7(s&^7s*%@6-03(!od0a7qb%^vjk&ma!pakdog@m^iq33c^1^)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['ittissal.com', 'www.ittissal.com']
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    'http://www.ittissal.com',
-    "http://ittissal.com",
+    'http://ittissal.com',
+     'www.ittissal.com',
 ]
 # Application definition
 
@@ -165,7 +165,7 @@ AUTH_USER_MODEL = 'psychapp.CustomUser'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'taibiabdessamad2003@gmail.com'
-EMAIL_HOST_PASSWORD = 'tnuoeqtcvwncjucj'
+EMAIL_HOST_USER = 'co.espaces@gmail.com'
+EMAIL_HOST_PASSWORD = 'bdzqdhrhexuiyivh'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'no-reply@co-espace.com'

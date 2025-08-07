@@ -128,3 +128,15 @@ class MyAppointmentViewSet(viewsets.ModelViewSet):
         if appointment.psychologist != request.user:
             raise PermissionDenied("You can only delete your own appointments.")
         return super().destroy(request, *args, **kwargs)
+
+class AllAppointmentViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = AppointmentSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+
+    def get_queryset(self):
+        # Get all cabins created by the current admin
+        cabins = Cabin.objects.filter(created_by=self.request.user)
+        # Return appointments for those cabins
+        return Appointment.objects.filter(cabin__in=cabins)
+
+
