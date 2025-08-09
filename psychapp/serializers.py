@@ -71,7 +71,8 @@ class CabinSerializer(serializers.ModelSerializer):
 class AppointmentSerializer(serializers.ModelSerializer):
     psychologist_username = serializers.UUIDField(source='psychologist.username', read_only=True)
     psychologist_email = serializers.EmailField(source='psychologist.email', read_only=True)
+    cabin = serializers.CharField(source='cabin.name', read_only=True)
     class Meta:
         model = Appointment
-        fields = ['id', 'psychologist_username','psychologist_email', 'client_name', 'date', 'start_time', 'status']
-        read_only_fields = ['psychologist_username', 'psychologist_email']
+        fields = ['id', 'psychologist_username','psychologist_email', 'client_name', 'date', 'start_time','status','room','cabin']
+        read_only_fields = ['psychologist_username', 'psychologist_email','cabin']

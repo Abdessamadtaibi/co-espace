@@ -25,13 +25,13 @@ SECRET_KEY = 'django-insecure-7(s&^7s*%@6-03(!od0a7qb%^vjk&ma!pakdog@m^iq33c^1^)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['ittissal.com', 'www.ittissal.com']
+ALLOWED_HOSTS = ['ittissal.com', 'www.ittissal.com', ]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     'http://ittissal.com',
-     'www.ittissal.com',
-]
+    'http://www.ittissal.com',
+   ]
 # Application definition
 
 INSTALLED_APPS = [
@@ -128,8 +128,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -141,7 +141,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
 }
-
 
 DJOSER = {
     'LOGIN_FIELD': 'email',

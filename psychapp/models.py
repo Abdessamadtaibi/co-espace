@@ -21,7 +21,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('role', 'admin')
-        return self.create_user(email, password, username, role=extra_fields.get('role'), **extra_fields)
+        return self.create_user(email, password, username, **extra_fields)
 
 class CustomUser(AbstractUser):
     ROLE_CHOICES = [
@@ -98,6 +98,7 @@ class Appointment(models.Model):
     ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    room = models.CharField(max_length=10, default='')
     cabin = models.ForeignKey(Cabin, on_delete=models.CASCADE, related_name='appointments')
     psychologist = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, limit_choices_to={'role': 'psychologist'})
     client_name = models.CharField(max_length=100)
@@ -114,7 +115,7 @@ class Appointment(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        unique_together = ('cabin', 'date', 'start_time', 'end_time')
+        unique_together = ('cabin','room', 'date', 'start_time', 'end_time')
 
     def __str__(self):
         return f"{self.client_name} - {self.date} ({self.status})"
