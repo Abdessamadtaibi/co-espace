@@ -147,6 +147,8 @@ DJOSER = {
     "SEND_ACTIVATION_EMAIL": True,
     "USER_CREATE_PASSWORD_RETYPE": True,
     'ACTIVATION_URL': 'activate/{uid}/{token}/',
+    "PASSWORD_RESET_CONFIRM_URL": "reset-password/{uid}/{token}", 
+    "SEND_CONFIRMATION_EMAIL": True,
     'SERIALIZERS': {
         'user_create': 'psychapp.serializers.CreateUserSerializer',
         'current_user': 'psychapp.serializers.UserSerializer',
