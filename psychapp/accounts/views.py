@@ -37,6 +37,6 @@ class ResetPasswordView(View):
         )
 
         if response.status_code == 204:  # success
-            return HttpResponse("✅ Password reset successful. You can now log in.")
+            return render(request, "reset_success.html")
         else:
-            return HttpResponse("❌ Invalid or expired reset link.")
+            return render(request, "reset_error.html")

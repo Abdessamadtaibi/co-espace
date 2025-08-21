@@ -105,7 +105,7 @@ class Appointment(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField(blank=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Confirmed')
     notes = models.TextField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
